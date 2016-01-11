@@ -1,0 +1,158 @@
+***Support Vector Machines (SVM) - Optimization Objective*** - Vid 1 - Week 7
+
+To get the Support Vector Machine we are going to manipulate our logistic regression algorithm:
+aka alternative view of logistic regression:
+
+Turning logistic regression Algorithm into Support Vector Machine:
+
+See screenshot: w7 - LogReg-SupportVectorMachineAlgo
+
+SVM just makes a prediction of our hypothesis that 
+
+           1 if (θ^T) * x >= 0
+h_θ(x)   {  
+           0 otherwise
+           
+***Support Vector Machines (SVM) - Large Margin Intuition*** - Vid 2 - Week 7
+
+See screenshot: w7 - SVM-Cost_1,0_Graph
+
+See screenshot: w7 - SVM-DecisionBoundary
+
+To note,using large margin classifier such as SVM does not handle outliers very well. 
+However, if C is very large then the margin classifier handles the outliers and model better. 
+Basically, outliers are outliers. 
+
+***Support Vector Machines (SVM) - Math behind Large Margin Classification*** - Vid 3 (this video is optional)
+- Week 7 - (Skipped for now)
+
+***Support Vector Machines (SVM) - Kernels I*** - Vid 4 - Week 7
+
+Remember that we are now denoting our features as f_1 rather f_1 = x_1
+
+Different similarity functions are kernels. In this video we look at a Gaussian Kernel. 
+
+See screenshot: w7 - Kernel I_SimilarityFcnNotation
+
+Our question to answer, what do Kernels do exactly?
+
+See screenshot: w7 - Kernel I_HowKernels&SimilaritiesRelate
+
+See screenshot: w7 - Kernel I_HowKernels&SimilaritiesRelate_Graphically
+
+The ultimate use of using Kernels in this video is to predict a decision boundary. 
+This decision boundary we find may focus around two landmarks or one landmark 
+and helps us better understand the relationship of features to our model.
+
+***Support Vector Machines (SVM) - Kernels II*** - Vid 5 - Week 7
+
+Basically, with landmarks we are looking at the actual data, and we are using them to see 
+how close to our original set of data our predictions are. 
+Thus, we set each landmark equal to one of our training examples. 
+In other words:
+My features will measure how close an example is with my training set.  
+
+To solve for the optimized values of theta, we must look at minimizing our new SVM with Kernels:
+
+To note, we generally use libraries or other prepackaged software to run the minimization of Kernels.
+The reason being is that it already hosts all of the small mathematics changes that are involved with producing 
+the SVM algorithm. We have yet to learn what they are. Don't write software to do this, use off-the-shelf software. 
+
+See screenshot: w7 - SVM With Kernels_MinimizeSVMEqn
+
+Our next question: How to choose the parameters of the SVM?
+
+We need to chose C and sigma in our model. The following screenshot displays the relationship 
+of these parameters.
+
+See screenshot: w7 - SVM_RelationshipOfParameters
+
+**Why are the following answers the correct answers to this quiz? 
+I thought thought that with overfitting there is low variance and high bias???
+
+Tutorial Quiz:  w7 - Vid 5 Quiz_OverfitData_HowToCorrect
+
+***Support Vector Machines (SVM) - Using an SVM *** - Vid 6 - Week 7
+
+Need to specify:
+-Choice of parameter C
+-Choice of kernel (similarity function):
+
+See screenshot: w7 - Vid 5 SVM SoftwarePacks_GaussianKernel
+
+Software packages expect you to provide the kernel function takes x1, x2 an generates a real number. 
+Then it will generate all of the features, etc.
+It is important to use feature scaling before using the Gaussian kernel
+
+Two most common kernels (Linear kernel "no kernel") and Gaussian Kernel. 
+There are a few other choices of kernels but they are used very rarely:
+
+Note: not all similarity functions similarity(x,l) make valid kernels.
+They need to satisfy the technical condition called "Mercer's Theorem" to make sure SVM
+packages' optimizations run correctly, and do not diverge. 
+
+-Polynomial kernel: k(x,l) = (((X^T)*l) + constant)^degree
+-string kernel
+-hi-square kernel
+-histogram intersection kernel
+-etc.
+
+However, like we said, most people use either the linear or Gaussian kernel, 
+and in general will never use these kernels. Can find them online if need be. 
+
+Choose whatever works best on the cross-validation set.
+
+When to use logistic regression verse SVMs:
+
+See screenshot: w7 - LogReg_vs._SVMs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

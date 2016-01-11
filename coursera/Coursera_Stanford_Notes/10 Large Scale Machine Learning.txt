@@ -1,0 +1,139 @@
+	***Large Scale ML - Learning With Large Datasets *** - Vid 1 - Week 10***
+	
+We will talk about algorithms with large data set. 
+
+One way to get high performance machine learning system is if you take a low bias algorithm 
+and train that on a lot of data. 
+ 
+ Who wins is not necessarily who has the best algorithm, but who has the most data. 
+ 
+ 
+	***Large Scale ML - Stochastic Gradient Descent *** - Vid 2 - Week 10***
+
+Come up with cost function and then minimize it with gradient descent. 
+
+Now we will have to modify the basic gradient descent model to get the 
+stochastic gradient descent used for large data sets. 
+
+In the inner for loop inside use the basic gradient descent:
+
+See screenshot: w10 - BasicGradientDescent
+
+Basically, Stochastic GD is used on a single training example for each iteration of the algorithm. 
+
+First, it looks at the first training example and then take a step to better fit the parameters to that example, 
+then it goes to the next example and so on. This will then speed up the iterations of 
+gradient descent since it is not using every training example. It is using one training example per iteration. 
+
+To note: Stochastic GD only uses one training example and so there is not much to vectorize over.
+
+See screenshot: w10 - StochasticGradientDescent
+
+For graph, what happens is that stochastic gradient descent generally will approach the global minimum. 
+However, it doesn't converge the same as batch (basic) gradient descent. 
+
+As long as the parameters that are being uncovered here, are in general near the 
+global minimum your hypothesis will run pretty well. 
+
+See screenshot: w10 - StochasticGradientDescent_Graph
+
+	***Large Scale ML - Mini-Batch Gradient Descent *** - Vid 3 - Week 10***
+
+see screenshot: w10 - Batch,Stochastic,Mini-Batch_GD_Comparison
+
+Mini-Batch GD Breakdown
+
+see screenshot: w10 - Mini-BatchGradientDescent
+
+Mini-batch is faster because it only uses b number of training examples 
+instead of waiting for it to scan through each training example. This can also include vectorization, 
+where as Stochastic GD only uses one training example and so there is not much to vectorize over. 
+
+	***Large Scale ML - Stochastic Gradient Descent Convergence*** - Vid 4 - Week 10***
+How do we know that stochastic gradient descent is converging and how do we pick the learning rate alpha. 
+
+see screenshot: w10 - Batch,Stochastic_GD_Convergence
+
+The following are good to reference in terms of convergence. 
+If the graph doesn't converge we need to decrease learning rate, alpha, a.
+
+See screenshot: w10 - Stochastic_GD_ConvergenceGraphs
+
+IF we want to get Stochastic GD to actually converge to a global minimum, instead of wondering around it, 
+we need to slowly decrease learning rate, alpha, a (Decrease alpha overtime). 
+
+alpha = const1 / iterationNumber + const2
+
+Because as the iteration number increases alpha goes to 0. Thus, Stochastic GD will converge to a global minimum.
+
+	***Large Scale ML - Online Learning (The online learning setting)*** - Vid 5 - Week 10***
+
+We have a continuous stream of data coming in, 
+and so we could use an online learning algorithm to find better ways to optimize your website. 
+
+This online learning algorithm can adapt changing user preferences. 
+
+See screenshot: w10 - OnlineLearning_Algorithms
+
+Example, predict best price when we offer our the choice of using our own shipping company or not. 
+
+Example, predict search results (list ten in most appropriate order)
+
+See screenshot: w10 - OnlineLearning_Examples
+
+This is similar to stochastic gradient descent algorithm. 
+The goal will with online learning algorithms will be to translate from stochastic GD. 
+
+
+	***Large Scale ML - Map-reduce and data parallelism *** - Vid 6 - Week 10***
+
+Some machine learning problems are too big to run on a single machine. 
+The data sets are just too big, and so we have developed tools like map reduce and data parallelism (one thing). 
+Using these tools we can scale GD algorithms. 
+
+Map-Reduce and data parallelism. Basically, we are taking ranges of training sets 
+and then adding them back into an aggregated "map-reduce and data parallelism" machine learning algorithm. 
+Thus, a single computer in a cluster only has to process a fraction of the work. 
+For example, we could have 4 machines split the subset of data into 1/4 or 
+processing for each machine, and then have another server aggregate the results. 
+
+See screenshot: w10 - Map-ReduceAlgorithm
+
+Map-Reduce and data parallelism works really well if many learning algorithms can be expressed as computing the sums
+of functions over the training sets. 
+
+Question: what is the difference between map-reduce logistic regression and regular logistic regression?
+
+**Hadoop is an example of cluster computers that can use map-reduce and data parallelism algorithms 
+to divy up the work and execute it.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

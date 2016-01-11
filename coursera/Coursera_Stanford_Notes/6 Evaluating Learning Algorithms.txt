@@ -1,0 +1,269 @@
+***Evaluating a Learning Algorithm*** - Vid 1 - Week 6
+
+Let's say that after running your learning algorithm, you are seeing that your hypothesis and predictions 
+have a large error to the actual value:
+-Get more training examples
+-Try smaller sets of features
+-Try getting additional features
+-Try adding polynomial features
+-Try decreasing lambda, λ
+-Try increasing lambda, λ
+
+We will learn a simple technique that will rule out at least half of the list above.
+
+Machine Learning Diagnostic - a test that can be run to give insight as to why a test is working or not working
+and gain guidance as to how to best improve the learning algorithms performance. 
+
+***Evaluating a Hypothesis - That has been learned by our hypothesis*** - Vid 2 - Week 6
+
+How to tell if a hypothesis is overfitting out data:
+
+see screenshot - w6 - DiagnosticTest_SplitData
+
+see screenshot - w6 - DiagnosticTest_LinearReg
+
+see screenshot - w6 - DiagnosticTest_LogReg
+
+***Advice for Applying Machine Learning - Model Selection and Training/Validation/Test Sets*** - Vid 3 - Week 6
+
+Once parameters were fit to some set of data (our training set), the error of the parameters 
+as measured on that data (the training error J(θ)) is likely to be lower (or a good estimate) than the actual 
+generalization error (rather how well the hypothesis can generalize to new examples).
+
+Model selection:
+We want to choose a degree (d) of a polynomial to also go along with our features, as well as selecting our parameters. 
+We will choose the best value of 'd' that gave us the best possible performance on our test set. 
+This means that we will take each degree (let's say 1-10) and run the cost function for each. 
+See below for *explanation of comparison of Training Set, Cross Validation Set, and Test Set*. 
+ 
+
+see screenshot - w6 - ModelSelection_TestCostFunc_PerDegree
+
+-We fit parameter 'd' to the test set
+-By doing so, this means that the performance of the hypothesis may not be a 
+fair estimate on how well the hypothesis is likely to do on examples we haven't seen before.
+
+see screenshot - w6 - ModelSelection_EvalHyp_TestCostFunc_SplitTrainSet
+
+For each of our new sets:
+Training set - %60
+Cross Validation Set - %20
+Test Set - %20
+
+We will calculate the cost function and then minimize (like we would with just the training set). 
+% My guess is then we do a comparison of some sorts to see how our performance is across the board.
+
+*Explanation of comparison:*
+After minimizing the cost function of each, we will take the the parameters we uncovered for each degree cost function,
+and plug them into the Cross Validation Cost Functions set to determine which 
+hypothesis of parameters will have the lowest cross validation error.
+
+Finally, after we have taken the best hypothesis determined by the cross validation set,
+we can then use the Test Set to measure/estimate the generalization error 
+(rather how well the hypothesis can generalize to new examples) of the model that was selected by our algorithm. 
+
+***Advice for Applying Machine Learning - Diagnosing Bias vs. Variance*** - Vid 4 - Week 6
+
+see screenshot: w6 - Diagnose_Bias(Underfit)Vs.Variance(Overfit)
+
+Bias (under-fit model) if J_train has high error and J_cross validations (cv) approx (~) J_train
+then we have under-fit our model
+
+
+Variance (overfit model) if J_train is low but we have a high variance, 
+rather J_cv >> J_train then we have overfit our model.
+
+***Advice for Applying Machine Learning - Diagnosing Bias vs. Variance with Regularization*** - Vid 5 - Week 6
+
+If lambda small then we are not using much regularization and run larger risk of overfitting
+
+If lambda large, we are using more regularization (has more weight) we run a higher risk of running a biased model
+
+Thus, we are looking for the intermediate lambda value that is going to be just right,
+not too much bias or variance (the right amount of both).
+
+***Advice for Applying Machine Learning - Learning Curves*** - Vid 6 - Week 6
+
+As the training set grows the average training error increase. 
+
+Good to know if we have high bias, because then we need to revisit our model verse trying 
+to capture more training examples (data).
+
+see screenshot: w6 - Diagnose_Bias(Underfit)_Graph
+
+Good to know if we have high variance, because then we likely need to get more training examples.
+
+see screenshot: w6 - Diagnose_Variance(Overfit)_Graph
+
+***Advice for Applying Machine Learning - Debugging Learning Algorithm*** - Vid 7 - Week 6
+
+The following screenshot gives an overview as to the different debugging techniques one would take 
+if they are still finding a large error after running algorithm with regularization.
+
+See screenshot: w6 - Diagnose_DebugginAlgorithm-Model
+For Neural networks, suppose you fit a neural network with one hidden layer to a training set. 
+You find that the cross validation error J_cv is much larger than the training error J_train. 
+Is increasing the number of hidden units likely to help?
+
+Ans: no, because it is currently suffering from high variance, so adding hidden units is unlikely to help.
+
+see screenshot: w6 - Diagnose_NN-OverfitModel_Overview
+
+-First Quiz and Exercise 5 were done here in the middle of this week. 
+
+***Advice for Applying Machine Learning - Prioritizing What to Work On*** - Vid 8 - Week 6
+
+Prioritize time on what to work on.
+
+Building spam classifier:
+Features x: choose 10,000-50,000 words to classify as spam or not spam
+What is the best use of our time when making our spam classifier have high accuracy/low error. 
+-Collect lots of data: one way of doing this is a 'honeypot' - create fake email addresses 
+and try and get them into the hands of spammers so that we can collect lots of spam emails (rather spam data).
+-Develop sophisticated features possibly based on the email routing information (from email header). 
+-Develop more sophisticated features for the message of the body, e.g. should "discount" 
+and "discounts", or "deal" and "deals" be treated as the same word? Or how about punctuation?
+-Develop sophisticated algorithm to detect misspellings.
+
+Normally a data group will randomly fixate on one of these options. 
+We need to brainstorm the best area to use our time so that we have high accuracy / low error.
+
+***Advice for Applying Machine Learning - Error Analysis*** - Vid 9 - Week 6
+
+This will help us locate the best option to work on. 
+
+Recommended approach
+-start with a simple algorithm that can be implemented quickly. 
+Implement it and test it against our cross-validation data.
+-Plot learning curves to decide if more data, more features, etc. re likely to help.
+-Error analysis: Manually examine the examples (in cross validation set) that our algorithm
+made errors on. See if we can spot the any systematic trend in what type of examples it is making errors on. 
+Basically, look at the errors it is misclassifying or mis-predicting
+
+In general the most efficient way to go after creating the correct algorithm for our problem, 
+is to try and implement a quick and dirty algorithm (basic but uses some initial information to gather the top features)
+then to run it against our data set, and see if we can't figure out the best area to focus on.
+Finally, use a cross validation set to try and determine if the algorithm is making a/set of specific error/s.
+From here we can edit our algorithm to then better fit for our data. 
+
+See screenshot: w6 - Diagnose_Error Analysis - this example is the spam classification problem
+
+note: stemming software (e.g. Porter Stemmer) is used to compare words that are the same but have a different ending
+(e.g. discount, discounts, discounting, etc.) This may or may not be the best thing to try. 
+However, once it is implemented, test it on our cross validation error and see if it improves the error. 
+If it does, then obviously we should include it in our model algorithm. 
+
+Quiz question: why is the recommended approach to perform error analysis using the cross-validation 
+data used to compute J_cv(θ) rather than the test data used to compute J_test(θ)?
+
+Ans: If we develop new features by examining the test set, then we may end up choosing features 
+that work well specifically for the test set, so Jtest(θ) is no longer a good estimate of how well 
+we generalize to new examples. 
+
+***Advice for Applying Machine Learning - Error Metrics for Skewed Classes*** - Vid 10 - Week 6
+
+Precision / Recall 
+
+see screenshot: w6 - Diagnose_ErrorAnalysis_SkewedClasses_Precision-Recall
+
+***Advice for Applying Machine Learning - Trade Off Between Precision and Recall*** - Vid 11 - Week 6
+
+Precision and Recall have an inverse relationship. 
+See screenshot below for the graph of their relationship with a given threshold.
+
+See screenshot: w6 - Trading Off Precision & Recall_Threshhold
+
+To note, the threshold curve on the graph can look a little different. 
+See the different colors to determine. 
+
+How do we choose the right threshold?
+
+Use F_1 Score
+
+See screenshot: w6 - Precision&Recall_ChooseThreshold_F1Score
+
+Quiz Question: You have trained logistic regression classifier and plan to make predictions
+according to:
+
+-predict y = 1  if hyp >= threshold 
+-predict y = 0  if hyp >= threshold 
+
+For different values of threshold parameter, you get different values of precision (P)
+and recall (R). Which of the following would be reasonable way to pick the value to use for the 
+threshold?
+
+Ans: Measure precision (P) and Recall (R) on the cross validation set and choose the value 
+of the threshold which maximizes 2(P*R/(P+R))
+
+***Advice for Applying Machine Learning - Data for Machine Learning*** - Vid 12 - Week 6
+
+Designing a high accuracy learning system 
+
+Large Data Rationale:
+
+See screenshot: w6 - LargeDataRationale
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,188 @@
+***Neural Networks (Classification) - Cost Function*** - Vid 1 - Week 5
+
+Goal is to fit the parameters to the cost function of our neural network:
+
+See Screenshot for Cost Function: w5* - NN_Class_Cost Function
+
+***Neural Networks (Classification) - Backpropagation*** - Vid 2 - Week 5
+
+Algorithm, Backpropagation to minimize our cost function.
+
+We need code to compute Cost Function (capital theta), and all derivatives of J, rather cost function. 
+
+We are going to focus on how to compute the partial derivative terms. 
+
+See screenshot for outline of minimizing our multi-class cost function with backpropagation algorithm 
+that takes the derivatives of all of the output layers: w5* - NN_Multi-Class_Backpropagation_Algo_Outline
+
+See screenshot: w5* - NN_Multi-Class_Backpropagation_Algo_Sequence
+
+-For loop in blue brackets. Use the order he presents in the for loop to write our code. 
+-outside of For loop calculate the derivates, including regularization when J ~= 0 and excluding when J = 0.  
+-can be vectorized into one function that Andrew outlines in the bottom right corner of the screen. 
+
+For example going from (x^(1), y^(1)) to (x^(2), y^(2)), the order that the algorithm calculates is.
+
+Forward propagation using x^(1) followed by backpropagation using y^(1), 
+and then forward propagation using x^(2) followed by backpropagation using y^(2).
+
+***Neural Networks (Classification) - Forward & Backpropagation Explained*** - Vid 3 - Week 5
+
+see screenshot: w5* - NN_Forward&Backpropagation_Explained
+
+***Neural Networks Learning - Implementation Note: Unrolling Parameters*** - Vid 4 - Week 5
+
+see screenshot: w5* - NN_Forward&Backpropagation_Octave_Adv_Optimiz
+
+-jVal is going to retrieve the matrices of theta 
+-gradient is going to retrieve matrices of our derivatives, D^(i)
+
+Our goal is to take the theta and derivative matrices and unrolling them into vectors 
+so that they are in a format that we can then feed into our 
+initialTheta and theta in the costFunction, and get out of our gradient. 
+Note: see below for outline of code.
+
+function[jVal, gradient] = costFunction(theta)
+
+optTheta = fminunc(@costFunction, initialTheta, options)
+
+See screenshot: w5* - NN_Forward&Backpropagation_Octave_Matrix-Vector&Vector-Matrix
+
+-thetaVec & DVec turn the their corresponding matrices into long vectors.
+For example:
+thetaVec = [Theta1(:) ; Theta2(:) ; Theta3(:)];  %Theta1 is a 10 x 11 matrix
+												 %Theta2 is a 10 x 11 matrix
+												 %Theta3 is a 1 x 11 matrix
+		the result is thetaVec a long vector. Took all columns and stacked them on top of each other. 
+ 
+-the reshape() command will take long vectors and will use a defined set of elements
+(for example 1:100), and break them into the corresponding dimensions of the matrix (10 X 10)
+For example: 
+Theta1 = reshape(thetaVec(1:110), 10, 11);  % this will take the first 110 elements in the... 
+											% vector and put them into a 10 x 11 matrix. 
+											
+In this video, Andrew Ng then demonstrates matrix-vector and vector-matrix in octave. 
+
+Finally, see screenshot: w5* - NN_Forward&Backpropagation_Octave_Matrix-Vector&Vector-Matrix_Learning_Algo
+
+***Neural Networks Learning - Gradient Checking*** - Vid 4 - Week 5
+
+To note: there can be many small bugs with back propagation that will still make code 
+look like it is working correctly. This is why we need gradient checking, and this 
+pretty much helps eliminate all of the small bugs. 
+
+see screenshot: w5* - NN_Backprop_GradientChecking_Octave
+
+Implementation Note (everything quotes of the following lines is the command in Octave):
+
+-Implement backdrop to compute "Dvec" (unrolled D^(1), D^(2), D^(3))
+-Implement numerical gradient check to compute "gradApprox"
+-Make sure they ("Dvec" and "gradApprox") give similar values
+
+see screenshot: w5* - NN_Check_gradApprox~=DVec_Octave
+
+-Turn off gradient checking. Using backprop code (we use "Dvec" to calculate) for learning.
+
+Important:
+
+-Be sure to disable the gradient checking code before training your classifier. 
+If you run numerical gradient computation on every iteration of gradient descent (or in the inner
+loop of "costFunction(...)") your code will be very slow. 
+
+***Neural Networks Learning - Random Initialization*** - Vid 5 - Week 5
+
+When running gradient descent for logistic regression we were able to set
+initialTheta = zeros(n,1) in doing so ???
+
+When running gradient descent of neural networks, setting initialTheta = zeros(n,1), won't work. 
+This will cause all Theta parameters to be equal, thus, making every iteration of delta 
+to be equal when minimizing. So, as we run gradient descent, we are not improving the 
+parameters over each iteration. In other words, this will cause the weights of the parameters to be symmetric.
+
+In order to get around this problem, the way we initial the parameters of a neural network 
+therefore is with random initialization.
+
+Random Initialization causes Symmetry breaking (meaning that it takes symmetric parameters 
+and breaks them up so that we don't end up getting stuck with the same parameters of Theta,
+which causes us to reveal only one attribute in our hidden layer verse all of them. 
+
+***Neural Networks Learning Algorithm - Putting It Together*** - Vid 6 - Week 5
+
+1) Choose a neural network architecture:
+see screenshot: w5* - NN_ChoosingNNArchitecture
+
+2) Training a neural network:
+see screenshot: w5* - NN_TrainingNN_Steps1-4
+
+see screenshot: w5* - NN_TrainingNN_Steps5-6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

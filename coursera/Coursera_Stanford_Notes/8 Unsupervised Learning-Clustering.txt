@@ -1,0 +1,213 @@
+***Unsupervised Learning - Clustering*** - Vid 2 - Week 8
+
+Note: in vid 1 we just talked about clustering as one type of unsupervised learning algorithm...
+We also looked at the different examples:
+-market segmentation
+-social network analysis
+-computer cluster organization / server or database framework/infrastructure/etc.
+-astronomical data analysis
+
+Quiz (all of the following are true):
+1. in unsupervised learning, the training set is of the form {x^(1), x^(2), ..., x^(m)}
+without labels y^(i)
+2. clustering is an example of unsupervised learning
+3. n unsupervised learning, you are given n unlabeled dataset and are asked to find "structure" in the data.
+
+
+Vid 2 - K-means Algorithm (most popular and most used algo)
+
+Step 1: randomly initialize two cluster centroids. The reason we have two is because we want 
+to group our data into two clusters 
+Iteration algorithm:
+-cluster assignment step - goes through each example and sees which cluster centroid the specific example is closes to. 
+Then maps that example with the cluster centroid and color codes it. 
+-Next calculate the mean of all of the examples grouped with one cluster centroid, and then move the cluster centroid to that mean. 
+Do the same for both cluster centroids. 
+-Next reassign the examples closest to the newly placed cluster centroid (some examples will change).
+-Then repeat, calculate the mean again of the newly associated examples with the cluster centroid, move centroid, reassign examples, repeat. 
+
+**K-means Algorithm
+see screenshot: w8* - UnsuperLearn_K-meansAlgo
+
+we could also use K-means to segment a market such as separating t-shirt sizes (beer types, etc.)
+to determine the different markets to more accurately fit a t-shirt (or create a type of beer for a population).
+
+***Unsupervised Learning - Optimization Objective*** - Vid 3 - Week 8
+
+See screenshot: w8* - UL_Distortion K-means(DistCostFcn)
+
+The key is the function outlined in red
+What it's saying is that x^(i) is a training example and 
+M_c(i) (meu sub c of i) is the mean of the cluster centroid that x was assigned to. 
+Then it uses the squared error function to 
+
+In our for loop for the K-means algorithm which ultimately minimizes our distorted cost (distorted K-means) function,
+it randomly initializes our cluster centroid then it assigns our examples to the closest cluster centroid, then 
+it finds the mean of all the assigned examples of the specific cluster centroid, finally, 
+the inner loop will move the cluster centroid to the mean and then reassigns the examples that are now closest. 
+With this algorithm we minimize the distorted k-means function 
+(See screenshot above: w8* - UL_Distortion K-means(DistCostFcn) 
+
+In variables, first the outer loop minimizes the cost function with respect to our c(i) and 
+then the inner loop minimizes the cost function with respect to meu (M)/.
+
+***Unsupervised Learning - Random Initialization*** - Vid 4 - Week 8
+
+A great way to get around getting stuck at local optima after minimization occurs, 
+is to do multiple random initializations of cluster centroids (run a couple different models). 
+
+normal random initialization for K is from 50 - 1000 times {for i in range(1,1001)...}
+
+Finally, we would then pick the clustering that gave the lowest cost of the cost function (distorted).
+
+
+***Unsupervised Learning - Choosing the Number of Clusters*** - Vid 5 - Week 8
+
+The most common method is to just choose the number of clusters by hand
+
+However, another way we can try and look and the best number of clusters, we can use the "Elbow Method":
+Plot cost function J along with K (the number of clusters). If there is an obvious elbow to the curve,
+then that is the point at which we have selected the most appropriate number of clusters. 
+However, if there is no elbow then we can not conclude from the elbow method and thus should try hand selecting 
+or something else (not sure if something else exists).
+
+***Unsupervised Learning - Dimensionality Reduction - Motivation I: Data Compression *** - Vid 6 - Week 8
+
+Multi-Variable Calc:
+Basically, data compression is taking a mapping from R^n --> R^n-k where k >= 1 
+Normally, done between 3D --> 2D and/or 2D --> 1D.
+
+***Unsupervised Learning - Dimensionality Reduction - Motivation II: Data Visualization *** - Vid 7 - Week 8
+
+With features that are strongly correlated, we can normally map them to a different dimension. 
+It always helps to visualize these dimensions so we can always try for 3D, 2D, 1D. 
+For instance, if we have features:
+-GDP
+-Population
+-Resources
+-etc.
+We can do the following mapping:
+-Per person (or per percent of population) GDP
+-Per resource (or percent of available resources) GDP
+-etc.
+
+***Unsupervised Learning - Principal Component Analysis (PCA) Problem Formulation *** - Vid 7 - Week 8
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)
+
+To note: even thought we are mapping a line to compare our feature values and see if we can't minimize our error for grouping,
+this is NOT linear regression. It is PCA if stating that was not trivial enough.
+
+***Unsupervised Learning - Principal Component Analysis (PCA) Algorithm *** - Vid 8 - Week 8
+
+Step 1 - Data Preprocessing Step - MUST DO THIS FIRST**
+First replace x(i) with m(i) (meu i) and then make sure to do feature scaling
+
+See screenshot: w8* - UL_PCA_DataPreprocessing
+
+Step 2 - PCA needs a way to compute the unit vector after it projects each sample onto R^n - k
+
+See screenshot for a graphical representation: w8* - UL_PCA_DataPreprocessing_Graph
+
+? - What is the best value for u(i)?
+Procedure:
+
+We want to reduce data from n-dimensions to k-dimensions. We need to compute the:
+
+Covariance Matrix
+Then, compute the Eigen Vectors of the covariance matrix
+**We will use the svd() function in OCTAVE
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)Algo_Procedure_Part1(InDepth)
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)Algo_Procedure_Part2(InDepth)
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)Algo_Procedure_Part1&2(1Slide)
+
+***Unsupervised Learning - Dimensionality Reduction: Reconstruction from Compressed Representation *** - Vid 9 - Week 8
+
+Now we need to go the other way, rather, after compressing the data, we need a way to decompress it. 
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)Algo_Decompression
+
+***Unsupervised Learning - Dimensionality Reduction: Choosing the Number of Principal Components *** - Vid 10 - Week 8
+
+PCA tries to minimize the average squared projection error.
+Choose a K so that 99% of the variance is retained rather the 
+
+squared projection error / variance  <= .01 or rather 1%
+
+The long method is to start with k=1 and see if after running through PCA we get a 1% 
+if not, then try k=2, k=3, etc. making sure to run through PCA every time. 
+Since this could take a long time, we need a better way of selecting the the correct k:
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)_Choosing k
+We used [U,S,V] = svd(Sigma) which also outputs a square diagonal matrix S. 
+We can then use the matrix X to test our accuracy or "retention of variance," 
+which will go much faster than trying to run the full algorithm every time. 
+Thus, we can try more k's faster and come up with the k with the lowest minimization. 
+
+See screenshot: w8* - UL_PrincCompAnal(PCA)_Choosing k_Matrix S
+
+***Unsupervised Learning - Dimensionality Reduction: Advice for Applying PCA *** - Vid 10 - Week 8
+
+See screenshot: w8* - DimRed_PCA_MappingOutline
+
+Run PCA only on Training set portion of our data, not the Test or Cross Validation Set.
+
+By looking at data compression, we speed up the learning algorithm. 
+
+Application of PCA
+See screenshot: w8* - DimRed_PCA_ApplicationofPCA
+
+Don't use PCA to try and prevent overfitting. Use regularization.
+
+Before using PCA try running our regression learning algorithm first and see if our results are what we want. 
+If not, then let's take a look at running the PCA algorithm. 
+
+The majority of use of PCA is to compress data to speed up algorithms, have data take up less space, etc. 
+(along those lines of speed and less memory use)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

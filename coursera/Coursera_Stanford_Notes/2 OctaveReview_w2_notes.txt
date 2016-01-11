@@ -1,0 +1,775 @@
+NOTE: After installing patch for graphs for Octave-cli, generally there are no consequences of this for you. 
+If you build your own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/readline/lib
+    CPPFLAGS: -I/usr/local/opt/readline/include
+
+
+Week 2 ***Octave Review*** Vid 1 for Octave
+
+*Variables*
+
+Octave commands starting from the basics:
+
+1+2
+ans = 3
+
+1-2
+ans = -1 
+
+3/1
+ans = 3
+
+2*4
+ans = 8
+
+2^3 
+ans = 8
+
+1==2   % this evaluates to false so will return '0'
+ans = 0
+
+1~=2   % this evaluates to true so will return '1'
+ans = 1 
+
+1&&0   % this evaluates to false because 1 and 0 not true
+ans = 0
+
+1&&1   % this evaluates to true because  1 and 1 are both one so yes, rather true. 
+ans = 1
+
+1||0   % this evaluates to true because 0 or 1.
+ans = 1 
+
+1||1   % this evaluates to false because 1 or 1. 
+
+However, exclusive or 'xor' will evaluate expressions x and y, xor (x, y) as true if and only if one of x or y is true. 
+Otherwise, if x and y are both true or both false, xor returns false.
+
+xor(1,0)   % this evaluates to true because 1 or 0 but not both. 
+ans = 1
+
+xor(1,1)   % this evaluates to false because the statement '1 or 1 but not both' is false. 
+Both are 1, thus this statement is false. 
+ans = 0
+
+To change command prompt from 'octave:8>' for example, or from any variation:
+
+>> PS1('>> ');
+This will change the command prompt to '>> '
+
+Importance of semicolon at the end of the line, suppresses the output. 
+
+a = 3 will return 'a = 3'
+a = 3;
+
+will return '' nothing, rather it suppresses the output. 
+
+There are some preset variables such as 'pi'. 
+
+>> a = pi
+>> a 
+a = 3.1416
+
+>> disp(a)      % will return only the value associated with a. 
+3.1416
+
+
+>> disp(sprintf('2 decimals: %0.2f', a))
+2 decimals: 3.14
+
+'sprintf' generates a string ('2 decimals: '). We are unable to just display a string. 
+We must first generate the string 'sprintf' and then we can display it. 
+
+the '%0.2f', a      % returns a in place of '%0.2f', 
+rather it takes the string and replaces the value of a where '%...f' is.
+The 0.2 refers to how many decimal places to include of the variable a. 
+
+>> format long     
+>> a                  % 'format long' of 'a' will format the return value of 'a' to include more decimal places. 
+
+>> format short     
+>> a                  % 'format short' of 'a' will format the return value of 'a' to include less decimal places. 
+
+
+*Vectors and Matrices*
+
+>> A = [1,2;3,4;5,6]
+
+A = 
+
+[1   2]
+|3   4|
+[5   6]
+
+
+We can also create vectors and matrices like...
+
+>> v = 1:0.1:2
+
+This means start:increment by 'x number':finish (start:increment:finish). 
+Both start and finish are included. 
+This says start with the value '1' and increment by '0.1' until you get to '2'.
+It creates a row vector with the first index equal to 1, second index equal to 1.1, etc.
+
+v =
+
+ Columns 1 through 8:
+
+    1.0000    1.1000    1.2000    1.3000    1.4000    1.5000    1.6000    1.7000
+
+ Columns 9 through 11:
+
+    1.8000    1.9000    2.0000
+    
+We can also use a range 1:6 for example. 
+
+>> v = 1:6  % this creates a single row vector starting at 1 and going to 6. Similar to range.
+
+v =
+
+   1   2   3   4   5   6
+   
+>> ones(2,3)  % 'ones()' command creates a vector of ones the size of the indicated '(rows,columns)', 
+              % rather 2X3 matrix of ones. 
+
+ans =
+
+   1   1   1
+   1   1   1
+   
+>> 2*ones(2,3)
+ans =
+
+   2   2   2
+   2   2   2
+   
+Similarly, the function 'zeros(m,n)' will create a zero matrix fo the specified dimensions m X n.
+
+>> w - rand(1,3)  % this will generate 'random' values for a 1 X 3 matrix. 
+Command 'rand(m,n)' generates random numbers for the specified m X n dimensions of the matrix. 
+
+The random values will be generated for a random numbers drawn from a normal distribution, rather from 0 to 1 only. 
+'Normal Random Variable'
+octave:15> rand(3,3)
+ans =
+
+   0.0021707   0.1858024   0.6011687
+   0.5643588   0.1595006   0.9903768
+   0.9689975   0.5685649   0.0065341
+   
+>> randn(m,n)  % this will select random numbers from the Gaussian distribution 
+'Gaussian Random Variable'
+Gaussian Distribution uses 0 as the mean and standard deviation = 1. 
+
+octave:16> w = randn(1,3)
+w =
+
+   1.40398   0.48806  -0.12266
+   
+We can also use 'rand' within a string or equation:
+
+>> w = -1 + sqrt(10)*(randn(1,1000)) which will then generate random normal distribution 
+values of 1 row with 1000 columns times the square-root of 10 and then sill add a -1 to all values. 
+
+We can plot a histogram of this data using the following command:
+
+>> hist(w)
+When install fixed, this will produce a histogram of w. 
+<http://stackoverflow.com/questions/13786754/octave-gnuplot-aquaterm-error-set-terminal-aqua-enhanced-title-figure-1-unk>
+
+
+>> hist(w,50)    % this will produce a histogram taking into account 50 different buckets. 
+Graph in octave to see result. 
+
+>> eye(4)   % creates a 4x4 identity matrix. 
+'eye(n)' command creates identity matrix of the specified squared dimension, n x n.
+
+
+***Moving Data Around - Vid 2***
+A = [1,2;3,4;5,6]
+
+A =
+
+   1   2
+   3   4
+   5   6
+   
+size(A)        % this command will result in telling the size of the matrix.
+ans =
+
+   3   2       % size returns a matrix as well. So you can set the size matrix [3  2] equal to something else. 
+   
+sz = size(A)
+ans =
+
+   3   2  
+
+size(A,1)      % this will give us back the first dimension of A. 
+ans =  3
+ 
+v = [1 2 3 4 5]   % this creates a vector, v
+v =
+   1   2   3   4   5
+octave:45> length(v)   % this asks for the length of the vector, rather how many elements it has. 
+ans =  5
+
+% To note: length([1;2;3;4;5]) will also result in the length of the specified vector, [1;2;3;4;5].
+
+Let's say we have two data sets on our desktop. 
+For instance, one data set (one file; X matrix) includes the housing sizes and number of bedrooms, 
+and the second contains a data set of prices (y single column matrix or vector). 
+
+The commands below outline how to 'load' these data sets into Octave:
+
+ load 'filename'   % the 'load' command with a space after it and then the file name (without quotes) 
+ will load the data set into Octave. the syntax is synonymous with:  load('filename')
+ 
+ who    % the 'who' command will show us the active variables we have in the current Octave session. 
+ % After we load the files, we will see them in list generated from the 'who' command.
+
+whos    % gives a detailed view of the active variables we have in the current Octave session. 
+
+clear 'variable/filename'   % this command will remove the variable or filename (don't include quotes). 
+
+
+v = priceY(1:10)       % where 'priceY' is a matrix, will extract just the range of the first 10 (range 1-10) 
+elements of the matrix and store the result in v.
+
+save 'filename'   % this saves the filename in the working directories location.
+
+clear    % the 'clear' command without selecting a variable or filename, 
+will clear all of the variables and filenames for the active Octave work space.
+
+Now we are going to manipulate data. 
+
+A =
+
+   1   2
+   3   4
+   5   6
+
+A(1,2)        % This is how to select a particular index. First row, second column 
+ans = 2
+
+A(:,2)        % The colon selects entire rows and/or columns. All rows, second column. 
+
+ans =
+
+   2
+   4
+   6
+
+A([1 3], :)   %brackets indicate selecting an array (list) of rows and/or columns. 
+ans =         % First and third rows, all columns.
+
+   1   2
+   5   6      
+
+A(:,2) = [10;11;12]   % the equal in this matrix command for all rows and 2nd column, 
+      will replace the all rows, 2nd column with the indicated values in the brackets. 
+A =
+
+   1   10
+   3   11
+   5   12
+
+A = [A,[100;110;120]];  % appends another column to the end of the matrix (right side). 
+The 'A' in the brackets is referring to the original matrix A plus the extra bracket elements, 
+rather appending the elements. 
+
+A =
+
+     1    10   100
+     3    11   110
+     5    12   120
+     
+B = [11 22 33]
+B' = 11
+     22
+     33
+
+C = [A B]        % this will concatenate the two matrices,rather combine all of the columns into one matrix. 
+
+C =
+
+     1    10   100    11
+     3    11   110    22
+     5    12   120    33
+     
+C = [A;B]      % assuming the matrices have the correct dimensions, 
+               % the colon will put one matrix (A) on top of the second (B).
+               
+***Computational Operations*** - Vid 3
+
+octave:61> A =
+
+   1   2
+   3   4
+   5   6
+
+octave:62> B = [10 11;12 13; 14 15]
+B =
+
+   10   11
+   12   13
+   14   15
+
+octave:63> C = [1 1;2 2]
+C =
+
+   1   1
+   2   2
+
+A .* B  % the '.*' operator means take the same index of each matrix and multiply it together. 
+
+ans =
+
+   10   22
+   36   52
+   70   90
+
+octave:68> v = [1;2;3]
+v =
+
+   1
+   2
+   3
+    
+octave:69> 1./v  % the './' operator does the element-wise reciprocal. 
+ans =
+
+   1.00000
+   0.50000
+   0.33333
+   
+octave:70> 1./A    %this gives the inverse of A
+ans =
+
+   1.00000   0.50000
+   0.33333   0.25000
+   0.20000   0.16667
+
+octave:71> log(v)
+ans =
+
+   0.00000
+   0.69315
+   1.09861
+
+octave:72> exp(v)     % this is base e exponentiation of these elements. 
+ans =
+
+    2.7183
+    7.3891
+   20.0855
+
+octave:73> abs(v)   % absolute value
+ans =     % the elements are all positive so this is a bad example. 
+
+   1
+   2
+   3
+
+max(v)   % this will find the largest element. Same with min.  
+ans = 3
+
+max(A) % this will find the column-wise maximum of the matrix 
+ans =  %  (I think that means find the largest row vector). Same with min. 
+
+	5  6
+
+
+octave:74> a = [1 15 2 0.5]   
+a =
+
+    1.00000   15.00000    2.00000    0.50000
+octave:75> val = max(a)
+val =  15
+octave:76> [val,index] = max(a)         % calling indexes and values. 
+val =  15  %     We must use a variable in order to use both index and max(a) together. 
+
+index =  2
+
+
+magic(3)    % 'magic' command will create an square matrix with the mathematical property
+            % each row each column and each diagonal of the matrix add up to be the same number. 
+octave:77> A = magic(3)
+ans =
+
+   8   1   6
+   3   5   7
+   4   9   2
+   
+octave:79> [r,c] = find(A>=7)     % 'r' and 'c' stand for rows and columns. So this translates to 
+r =   % So this translates to 'Find the rows and columns that have an element greater than or equal to 7. 
+
+   1
+   3
+   2
+
+c =
+
+   1
+   2
+   3
+
+a = [1 15 2 0.5]
+
+prod(a)   % returns the product of all of the elements of a. 
+sum(a)     %sums a. summation. 
+
+
+max(rand(3),rand(3))  %takes the maximum of two random (normal distribution) 3 x 3 matrices.
+
+octave:80> max(A,[],1)   % this format takes the column-wise maximums of A. 
+            %The 1 means take the max along the first dimension of A 
+            % (first dimension are columns; dimensions (m x n).)
+            % rather it is going to produce a row of the maximums of each column.  
+ans =
+
+   8   9   7
+
+octave:81> max(A,[],2)   %same as above but for row. dimension 2 of m x n.
+ans =
+
+   8
+   7
+   9
+   
+   
+**  
+octave:82> A = magic(9)
+A =
+
+   47   58   69   80    1   12   23   34   45
+   57   68   79    9   11   22   33   44   46
+   67   78    8   10   21   32   43   54   56
+   77    7   18   20   31   42   53   55   66
+    6   17   19   30   41   52   63   65   76
+   16   27   29   40   51   62   64   75    5
+   26   28   39   50   61   72   74    4   15
+   36   38   49   60   71   73    3   14   25
+   37   48   59   70   81    2   13   24   35
+
+octave:83> sum(A,1)  % takes the sum of the first dimension of the matrix A (sum of each column). 
+ans =
+
+   369   369   369   369   369   369   369   369   369
+
+sum(A,2)   % will sum the rows. 
+**
+
+octave:84> A = eye(9)
+A =
+
+Diagonal Matrix
+
+   1   0   0   0   0   0   0   0   0
+   0   1   0   0   0   0   0   0   0
+   0   0   1   0   0   0   0   0   0
+   0   0   0   1   0   0   0   0   0
+   0   0   0   0   1   0   0   0   0
+   0   0   0   0   0   1   0   0   0
+   0   0   0   0   0   0   1   0   0
+   0   0   0   0   0   0   0   1   0
+   0   0   0   0   0   0   0   0   1
+
+octave:85> flipud(A)   % flips the matrix upside down. Inverts the matrix. 
+ans =
+
+Permutation Matrix
+
+   0   0   0   0   0   0   0   0   1
+   0   0   0   0   0   0   0   1   0
+   0   0   0   0   0   0   1   0   0
+   0   0   0   0   0   1   0   0   0
+   0   0   0   0   1   0   0   0   0
+   0   0   0   1   0   0   0   0   0
+   0   0   1   0   0   0   0   0   0
+   0   1   0   0   0   0   0   0   0
+   1   0   0   0   0   0   0   0   0
+
+pinv(A)  % the inverse of A
+
+
+***Plotting Data*** Vid 4
+t = [0:0.01:0.98];
+
+y1 = sin(2*pi*4*t);
+
+y2 = cos(2*pi*4*t);
+
+plot(t,y1) % plots the sin graph. 
+            % To plot both graphs at the same time we must use the 'hold on;' command. 
+            %Plot one graph then use hold on then plot the other.
+
+plot(t,y1)
+hold on;
+plot(t,y2)
+
+plot(t,y2,'r')   % will change the graph's color to red 'r'.
+
+xlabel('xyz')   % gives the x-axis a label. ylabel does the same for y.
+legend('sin','cos')   % creates a key for your graph
+title('xyz')       % creates a title. 
+
+You can save the picture of the graph to a directory by switching into the correct directory,
+ and then  using :
+ 
+ print -dpng 'myplot.png'       %png is the picture file type.  
+ 
+ 
+ figure(1); plot(t,y1);   % makes figure one the graphe of t and y1. 
+                        % you can have multipel figure windows open at one time.  
+subplot(1,2,1)  % Divides a plot into a 1 x 2 grid '(1,2...' and selects the te first element '...,1)'
+
+Try the following code to display multiple plots in the same window:
+
+figure(1); plot(t,y1);
+figure(2); plot(t,y2);
+subplot(1,2,1);
+plot(t,y1);
+subplot(1,2,2);
+plot(t,y2);
+
+axis[0.5 1 -1 1]   % the axis sets the x and y axis ranges (scale). 
+x is [0.5 to 1] and y is [-1 to 1].
+
+clf;   % this clears a figure
+
+octave:1> A = magic(5)
+A =
+
+   17   24    1    8   15
+   23    5    7   14   16
+    4    6   13   20   22
+   10   12   19   21    3
+   11   18   25    2    9
+
+octave:2> imagesc(A)     % this creates a colored array 5 x 5 matrix (because A is 5 x 5), 
+color                    % and the colors correspond with the value of the elements of A.
+
+
+octave:2> imagesc(A), colorbar, colormap gray;   %this runs three commands in a row.
+      % it sets the colormap to gray, meaning the colors will be a gray scale. 
+      % it provides a key or legend of the colorbar. What color corresponds to each value. 
+      % we would refer to the commas and a chain of function comma calls, meaning that 
+      % we take multiple related or corresponding functions and string them together. 
+      
+for instance we can write:
+
+a = 3, b = 4, c = 5; all on the same line to assign three values to three different variables. 
+
+you can also write it with semicolons:
+
+a = 3: b = 4: c = 5;
+
+
+***For, While, and If Statements & Defining Functions*** - Vid 5
+
+*For Loop*
+
+for i=1:10,
+	v(i) = 2^i;
+end;
+
+
+octave:4> v = zeros(10,1)
+v =
+
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+
+octave:5> for i=1:10,
+> v(i) = 2^i;
+> end;
+octave:6> v
+v =
+
+      2
+      4
+      8
+     16
+     32
+     64
+    128
+    256
+    512
+   1024
+   
+octave:7> indices = 1:10;
+octave:8> indices
+indices =
+
+    1    2    3    4    5    6    7    8    9   10
+
+octave:9> for i=indices,
+> disp(i);
+> end;
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+ 10
+octave:10> 
+
+*While Loop*
+
+octave:10> i = 1;           %this while loop replaces the first five entries with the value 100.
+octave:11> while i <= 5,
+> v(i) = 100;
+> i = i + 1;
+> end;
+octave:12> v
+v =
+
+    100
+    100
+    100
+    100
+    100
+     64
+    128
+    256
+    512
+   1024
+   
+octave:13> i = 1;        %this while loop replaces the first 5 entries with 999. 
+octave:14> while true,
+> v(i) = 999;
+> i = i + 1;
+> if i == 6,
+> break;
+> end;
+> end;
+octave:15> v
+v =
+
+    999
+    999
+    999
+    999
+    999
+     64
+    128
+    256
+    512
+   1024
+
+
+Review if elseif else syntax. We always need the end; at the end. 
+octave:16> v(1) = 2;
+octave:17> if v(1)==1,
+> disp('The value is one.');
+> elseif v(1)==2,
+> disp('The value is two.');
+> else,
+> disp('The value is not one or two.');
+> end;
+The value is two.
+
+
+% How to call the function from a .m file that has the function written within it. 
+%You must change into the directory first and then can run the function 'filename'('argument input')  + enter.
+% the function in the text file is :
+
+function y = squareThisNumber(x);
+
+y = x^2;
+
+
+octave:18> pwd
+ans = /Users/JonathonMG
+octave:19> cd /Users/JonathonMG/Desktop/
+octave:20> pwd
+ans = /Users/JonathonMG/Desktop
+octave:21> pwd
+ans = /Users/JonathonMG/Desktop
+octave:22> squareThisNumber(5)
+error: 'squareThisNumber' undefined near line 1 column 1
+octave:22> squareThisNumber(5)
+ans =  25
+
+function [y1,y2] = squareitcubeit(x)  % you can also put multiple functions into one. 
+
+y1 = x^2;
+y2 = x^3;
+
+%in the octave window
+
+[a,b] = squreitcubeit(5);
+
+a = 25;
+b = 125;
+
+Defining the Cost Function predefine file using the examples above. 
+
+X = [1 1;1 2;1 3] see screenshot
+
+***Vectorization*** - Vid 6
+
+Its a more efficient form of implementing cost functions and gradient descent. Minimizing thetas, etc.
+
+***Normal Equation*** - Vid 7
+
+pinv(X'*X)*X'*y will also give us the value of theta for the normal equation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+
+	
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

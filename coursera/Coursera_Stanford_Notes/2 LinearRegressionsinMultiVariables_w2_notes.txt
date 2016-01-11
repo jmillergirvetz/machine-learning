@@ -1,0 +1,352 @@
+Week 2 ***Multiple Features*** Vid 1 - a Multiple Features/Variables Linear Regression
+is more powefsrful. 
+
+An example of multiple variables is all of the things that could go into affect housing prices;
+(square feet, number of bedrooms, number of bathrooms, age, remodeled y/n, if remodeled y what year, etc.)
+
+Each of these variables can be thought of a as a column in a matrix. 
+A single row of the column would be one entry of all of the variables all related to a single house. 
+Notation for a specific row/s and variable/s is below:
+
+*see screenshot: Multiple Features Matrix Form*
+             n = 4
+'n' is the number of features/variables
+
+ (i)
+x
+ j
+
+The i indicates which row (aka specific example, the index, etc.) we are referring to 
+starting with count = 1.
+Rather, x^(i) is the input/features of the "i-th" training example. 
+
+The j indicates which variable's column number is being referred to. 
+Rather,  
+
+(i)
+x       is the value of feature j in the "i-th" training example. 
+ j
+ 
+Because of multiple features, we need to change our hypothesis. 
+
+h_θ(x) = θ_0 + θ_1x_1 + θ_2x_2 + ... + θ_nx_n
+
+For convenience of notation, we are going to define x_0 = 1. 
+This leaves θ_0 with an x_0 variable = 1. 
+Thus, the first column relating to the first variable (now x_0) is going to have x_0 = 1 for all rows. 
+We are defining a zero feature. 
+
+Our final hypothesis becomes
+
+h_θ(x) = θ_0x_0 + θ_1x_1 + θ_2x_2 + ... + θ_nx_n
+
+		  T
+h_θ(x) = θ x    theta transpose times x. 
+
+This is because [θ_0, θ_1,...,θ_n]  [x_0]  where [θ_0, θ_1,...,θ_n] is the transpose of theta. 
+								    |x_1|
+								    |...|
+								    [x_n]
+								    
+*
+Thus, final hypothesis definition:
+
+		  T
+h_θ(x) = θ x
+*
+
+***Gradient Descent of Linear Regression of Multiple Variables*** - Vid 2 - 
+How to fit parameters to each feature/variable. 
+We will still use Gradient Descent of Linear Regression of Multiple Variables.
+
+Here is our Cost Function with multiple parameters:
+
+J(θ_0,θ_1,θ_2,...,θ_n) = 1/2m∑ i=1 to m (h_θ(x^(i))−y^(i))^2
+
+However, now we will think of J(θ_0,θ_1,θ_2,...,θ_n) as J(θ), 
+where the theta (in J(θ)) is the vector of all parameters.
+
+Gradient Descent 
+Repeat {
+	θ_j := θ_j - a(d/dθ_j)J(θ_0,θ_1,θ_2,...,θ_n) 
+}
+
+Or rather 
+
+*Gradient Descent 
+Repeat {
+	θ_j := θ_j - a(d/dθ_j)J(θ) 
+} (Simultaneously update for every j = 0,1,2,...,n)
+
+Where the theta in J(θ) is referring to the the vector of (θ_0,θ_1,θ_2,...,θ_n).
+
+*The new Gradient Descent algorithm becomes:
+
+n >=1 
+Repeat {
+				   m    (i)  (i)  2  (i)
+	θ := θ - a[1/m ∑ (h(x) − y   )   x  ]
+	 j    j       i=1  θ
+} (simultaneously update θ_j for j=0,1,2,3,...,n)
+*
+
+***Gradient Descent in Practice I: Feature Scaling*** - Vid 3
+
+*Feature scaling is the idea that multiple features will be on a similar scale. 
+The more accurate their scale, the faster you descend to minimum error of gradient descent. 
+
+For example, if x_1 and x_2 are features (square feet 0-2000; bedrooms 1-5) and are not 
+closely related on the same scale (such as our example) then gradient descent will be much slower. 
+
+If we manipulate x_1 = feet^2/2000 and x_2 = bedrooms/5 then we get them to be on a similar scale, 
+which causes gradient descent to move much faster. 
+I think Dr. Ng is going to relate the values we manipulate by to the parameters. Let's see...
+
+General practice for feature/variable scaling is that after we scale the features, 
+a general good range for scaled features is:
+
+-1 <= x_i <= 1 
+
+If ranges are close to -1 and 1 then that is still ok. If they are far away 
+(-100 and 100   ;or;   -.000001 and .000001)
+then the feature is not properly scaled. 
+Since this is linear regression, we will most likely always be able to scale any feature.
+
+* Mean Normalization - need to review
+
+
+use normalization (I can't remember why we use this or what it has to do with this. 
+Something about subtracting distance from mean and dividing by the range (or maximum value) 
+to scale a feature. This means:
+
+Replace x_i/range with (x_i-m_i)/s_i
+
+where m is greek letter 'mue' meaning average, and s_i (the range) is the maximum value minus 
+the minimum value. You can also use Standard Deviation for s_i. 
+
+So, in our example above, x_1 = (feet^2-1000)/2000 and x_2 = bedrooms-2/(5-1)
+
+This could produce something like -0.5 <= x_i <= 0.5 for both features, and would be acceptable.
+
+Once again, this is an approximate scale, and as long as the features are close in scale, 
+then the gradient descent's process and speed will be optimized. 
+
+***Gradient Descent in Learning Practice II: Learning Rate, alpha, 'a'*** - Vid 4
+
+So, since we are trying to find the minimum value of J(θ), we know that J(θ) should decrease
+with every iteration of heta. 
+
+Thus, the gradient descent will be a decreasing parabolic or exponential curve
+
+	min J(θ)
+	
+	θ
+	|  |
+	|  |
+	|   |
+	|    \
+	|     |
+	|      \
+	|       \_________
+	|        .
+	|        .
+	|        .
+	|______________________
+	         | 
+	        No. of Iterations
+	         |
+	This point is the point at which this graph converges, rather doesn't decrease anymore. 
+	
+We can use the example of the automatic convergence test:
+Declare convergence if J(θ) decreases by less than 10^-3 in one iteration. 
+
+However, it is hard to predict how many number of iterations will be needed. 
+In the end, as one possible solution, you can still manipulate alpha to correct for this.
+
+If the graph doesn't decrease with every iteration, then it will look different than this. 
+For example, if alpha is too large, you can overshoot the minimum. 
+
+If alpha is really small then the minimum of J will always decrease with every iteration.
+However, you do not want alpha to be too small because then it will process too slowly 
+and will take too long. 
+
+To debug alpha the best way is to plot J(θ) and the number of iterations, like in our example above. 
+
+Another great way of choosing alpha 'a' is to try:
+1, 0.1, 0.01, 0.001, 0.0001, ..., etc.
+
+Then choose value of alpha that causes J(θ) to decrease rapidly. 
+
+***Features and Polynomial Regressions***
+
+We want to take a look at which are the best features to add to an equation. 
+
+By doing this, we can use specific learning algorithms which can be very powerful, 
+and can be used with particular variables or can be used more efficiently with specific variables. 
+
+In our example, we are going to look at frontage and depth of a house. 
+
+Frontage being the distance across the front of the house's lot. 
+Depth being the distance from the front to the back of the house's lot. 
+
+So, our hypothesis equation will be:
+x_1 = frontage
+x_2 = depth
+
+h_θ(x) = θ_0 + (θ_1*frontage) + (θ_2*depth)
+
+Area - the square distance calculated from frontage and depth.
+
+Area 
+
+x = frontage * depth
+
+Our hypothesis equation becomes:
+
+h_θ(x) = θ_0 + (θ_1 * x)   where x is our new variable Area. 
+
+*Polynomial Regression*
+
+This is used to fit the best model to your set of data. 
+For instance, it might be best to map an upside down parabola, 
+or in the housing prices instance either a cubic model or a square root model. 
+Both of the latter graphs produce graphs which map more accurately to the housing prices model with size. 
+As size increases there is a pint at which it tapers off. 
+That being said, however, the price of the house never decrease with an increase in housing prices. 
+Thus, a upside down parabola would not be the best fit.
+
+	Price
+	
+	y
+	|                        .     .   . . . . ...  
+	|              .. .   .   ...    . . . 
+	|          . . .  ... . . 
+	|         ....   .
+	|     . . .    . 
+	|      . . 
+	|    .    .
+	|  .. .   .     
+	|        
+	|______________________
+	         Size (x)
+	         
+A cubic or a square root function is going to map accurately to this data. 
+If there is benefit, then manipulating variables to be better starting variables 
+can hugely increase the accuracy of your model. 
+
+h_θ(x) = θ_0 + (θ_1 * size) + (θ_2 * size^2) + (θ_3 * size^3)
+
+or
+
+h_θ(x) = θ_0 + (θ_1 * size) + (θ_2 * √(size))
+
+***Normal Equation*** - Vid 6
+
+The Normal Equation for some learning regression problems is a much better way to solve 
+for the optimum parameters, theta values. 
+
+Normal equation allows us to solve for theta analytically. 
+
+For instance, some quadratic functions you can solve for the minimum value by taking the 
+derivative and setting it equal to zero. You will also get maximum values with this (if there are any),
+so will need to distinguish correct answers. 
+
+As we did in multivariable calc, you can also do this for higher dimensions of J(θ), 
+when theta is an element of R^n+1, meaning that it is an n dimensional vector 
+(n+1 because we include θ_0). If you take the derivative of J(θ) for all of the thetas, 
+and then set each individual derivative with respect to a particular theta equal to 0 to find the minimum. 
+Find the minimum for each theta and we have found the optimum value for our parameters. 
+
+Please see screenshot - Parameter (Theta) Minimization Matrix
+
+The screenshot will show us how to take a set of data (features, x, that effect housing price, y),
+and turn the features data into a matrix, X, and their outcome (housing price), vector Y. 
+With matrix X, we must include X_0 which is equal to 1 so the first column in our matrix is all 1's. 
+This is also why we talk about the number of columns being n+1.
+
+The X matrix is also called the 'Design Matrix' 
+
+We can minimize theta by using the following matrix equation:
+
+**
+      T    -1    T
+θ = (X * X)   * X  * y
+
+**
+
+Theta is equal to the inverse of x transpose times x, times x transpose, times vector y. 
+
+Also, understand that matrix X (of all the features) is an m X (n+1) matrix. 
+This means there are 'm' number of examples (m rows), and 'n+1' features (n+1 columns) 
+because we included θ_0 in our optimization rather we took X_0 and set it equal to 1, 
+so the first column in our matrix is all 1's.
+
+**Octave CODE**
+
+To compute our new minimization of theta we can use our new matrix equation:
+
+      T    -1    T
+θ = (X * X)   * X  * y
+
+Octave:     pinv(X'*X)*X'*y
+
+pinv is the command to calculate inverse of a matrix.
+X' (x prime) is the notation you use for X Transpose.
+y is the vector created by the end values we are trying to use to estimate our model 
+(e.g. Housing Prices).
+
+*NOTE: If you use this optimum value matrix equation there is no need to scale your features. 
+
+This equation will calculate the optimal value of theta, so that J(θ) is minimized. 
+
+Right now, we have been taught two different methods to find our parameters for our 
+linear regression formula:
+
+Gradient Descent - will most likely need to scale our feature, 
+so that we can effectively use gradient descent.
+-need to choose an alpha, a
+-possibly needs many iterations
+
+Normal Equation - no need to scale our features because will use calculus and 
+matrix multiplication to find minimum values of theta in the Cost Function. 
+-no need to choose an alpha, a
+-don't need to iterate because we solve for the minimum value which was 
+proved by taking derivative and setting it equal to zero. 
+
+*So, when should we use gradient descent and when should we use the normal equation?
+
+Gradient Descent works very well when the number of features (n) is very large. 
+
+Normal Equation we will need to compute (X^T*X)^-1 , and thus, 
+this computation takes a long time if the number of features is very large. 
+
+In general, if there are 10,000 or more features then we would start to wonder which equation is 
+going to be a better model. 10,000 or more gradient descent, and any number of features 
+9999 and below use normal equation. 
+
+The Normal Equation doesn't work for more sophisticated learning algorithms. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+

@@ -1,0 +1,119 @@
+***Neural Networks: Representation - Non-Linear Hypotheses*** - Vid 1 - Week 4
+
+Representation:
+
+An example would be fitting logistic regression to our model of image recognition. 
+For example, we will determine if the image is a car or not. 
+To fit the perfect non-linear regression to our model, we would need to fit too many features and 
+mixed features (features directly correlated with another like X_1 * X_2 or X_1^2.  
+As a plausible solution, we can bucket our features or use a subset. 
+For instance, we would take all second order polynomials X_1^2, X_2^2, etc... and bucket them together in our model.
+
+To look at how many of these mixed features will be, in general there are approximately:
+
+1st order: n
+
+2nd order: (n^2)/2
+
+3rd order: (n^3)
+
+Not sure if fourth order will ever be used in our R^3 space. 
+
+So when they use 100 X 100 pixels (image resolution), it really means that there are 
+10,000 pixel intensities (100 X 100). However, we would then decide which bucket to use. 
+Let's choose the 2nd order (quadratic) bucket. This means that there will be 
+
+(10,000^2)/2 rather 5 X 10^7 or 50,000,000
+
+***Neural Networks: Representation - Neurons and the Brain*** - Vid 2
+
+Origins: Algorithms that try and mimic the brain
+There has been a recent resurgence: because of some state-of-the-art techniques for many applications.
+
+A new hypothesis, is that the the brain cortexes can be rewired to adapt to new input. 
+For example we can rewire the brain to teach the audio cortex to interpret site. 
+Similarly with other cortexes as well. 
+
+If the same piece of brain tissue that can process all of the senses. 
+Instead of programming a million algorithms to map to all of the pieces of the brain, 
+we think there can be one algorithm that can interpret all inputs (senses) 
+because we see this with the brain tissue.
+
+***Neural Networks: Representation - Neurons and the Brain*** - Vid 3
+
+How we represent our hypothesis for neural networks:
+Neuron's are cell in the brain. See image for Cell structure. 
+
+Input Wires (the Dendrites), and the output wires (axons). 
+Axons send the signals to other nurons and the axons 
+from one neuron connect with the dendrites of another (logical).
+
+See screenshot series:   w4 - Single Neuron Model_Log Reg_Part 1
+This is the example of the Neuron model using Logistic regression so our 
+hypothesis = h(x) = 1/(1+e^-(θ' * x))    Sigmoid function (logistic regression hypothesis).
+
+see screenshot: w4 - Neuron Network Model_Log Reg_Part 2
+
+Really important screenshot: w4* - Neural Network_Hypothesis Dev
+
+We have shown that a picture like this defines an artificial neuro network which defines a 
+function, h (our hypothesis), 
+which maps from x's inputs values that hopefully maps to y.
+
+
+***Neural Networks: Representation - Neurons and the Brain - Model representation II - 
+Forward propagation - Vectorized Implementation*** - Vid 4
+
+See screenshot:  w4* - NN_Forward Propagation
+&: w4* - NN_Non-Linear Hypothesis_For Prop
+
+The features in the 2nd layer are learned as functions of the input concretely the function 
+mapping from layer 1 to 2 is determined by some other set of parameters theta 1, 2, etc.
+It learned its own layers of what features it should include. 
+
+The way the different neural networks are connected and is called the "architecture" of neural networks.
+
+***Neural Networks: Representation - *** - Vid 5
+
+See screenshot: w4* - NN_Param&Boolena Fcn Diagram
+
+Remember that g(z) has an s-curve from 0 to 1. As z values get less than -4.6 the graph 
+asymptotes with 0 (goes to 0); as z values get greater than 4.6, then asymptotes with 1 (goes to 1).
+
+Build truth table to uncover the correct boolean statement for our neural network.
+
+Neurons in a neural network can be used to compute logical function like and/or
+
+ 
+***Neural Networks: Representation - *** - Vid 6 - Compute complex non-linear hypotheses. 
+
+See screenshot: w4* - NN_Non-linear Multi-Layer Truth Table
+
+***Neural Networks: Representation - Multi-Class Classification - *** - Vid 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

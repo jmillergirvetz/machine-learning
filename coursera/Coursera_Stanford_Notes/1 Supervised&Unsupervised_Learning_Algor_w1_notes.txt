@@ -1,0 +1,673 @@
+***Supervised Learning*** Vid 1- algorithm that produce more "right answers" given 
+
+Regression - predict continuous valued output (value attribute).
+
+Classification - goal to produce a discrete valued output (0, 1); yes or no; True or False'\; etc.
+you can also have more than two types of output: 0, 1, 2, 3. 
+For example: 
+0 = breast cancer
+1 = stomach cancer
+2 = leukemia
+3 = pancreatic cancer
+
+Features of machine learning:
+-Clump Thickness
+-Uniformity of Cell Size
+-Uniformity of Cell Shape
+
+Interesting Learning Algorithm we will learn about can compute an infinite set of features,
+or a feature that is an infinite set, 
+
+???First question:
+
+You're running a company and are trying to figure out which algorithm to use:
+-Prob 1: You have inventory of identical items. You want to predict how many of these /
+items will be sold over the next three months.
+-Prob 2: You'd like software to examine individual customer accounts to determine /
+if the account has been hacked or compromised.
+
+A) Treat both as classifications problems
+B) Treat prob 1 as classification and prob 2 as regression.
+C) Treat prob 1 as regressions and prob 2 as classification.
+D) Treat both as a regression problems. 
+
+Well, I know that prob 2 is classification because you are "classifying" each account as/
+hacked, compromised, or safe. Thus, prob 2 is classification. 
+That means that the answer could be either A or C. So, let's look at prob 1. 
+
+Prob 1 is looking at **inventory of identical items**, and changes over a period of time.
+Firstly, since we're looking at identical items, they could be treated as a continuous value. 
+So, my inclination is to go with answer C: (Prob 1 is regression and Prob 2 is classification).
+
+C is correct. YEAH!!!
+
+***Unsupervised Learning*** Vid 2 
+
+First type of unsupervised learning algorithm is a clustering algorithm (an example is Google News)
+
+Google news looks at tens of thousands of news stories and then clusters them into one 
+story with inks to different news companies.
+
+Unsupervised Learning algorithm 
+
+does not take pre-defined input into consideration when 
+"clustering" or bucketing data. In fact, you don't have any idea what the clusters are
+until after the algorithm is ran and clusters your groups/buckets together. 
+Not sure how it works yet, other than the Gene example. My guess is that the algorithm
+changes example to example, but is somehow drawing correlations (causations), 
+defining ranges (boundaries), etc.
+
+Other areas of examples of unsupervised learning algorithms:
+-Organize computer clusters (server networks, computer networks, data storage center management, etc.)
+-Social network analysis   (looking at groups of people; how they interact; 
+given knowledge of click interactions, interactions between users, can we identify 
+cohesive groups of friends; etc.)
+-Market segmentation (Customer information, future growth and sales, etc.) 
+Used to efficiently and effectively market and sell products. 
+Unsupervised learning because we don't have prior knowledge what the market segments are. 
+We have to let **the algorithm show us.**
+-Astronomical data analysis 
+
+Second type of unsupervised learning algorithm is Associative. 
+
+-The cocktail party problem example. People are talking over each other and different 
+microphones placed at different points in the room pick up the jumbled voices. 
+The unsupervised learning algorithm will look at structure of the audio waves, 
+cluster the waves that relate together, and ultimately separate the 
+overlapping audio waves into the individual speaker's audio clip. 
+
+Dr. Ny (Ng) built the unsupervised learning algorithm to separate overlapping audio clips. 
+He did it with one line of code, which took a long time to come up with. 
+His major advice is that if you know the right programming environment to use, /
+many algorithms can be written in short programs. 
+
+I am not sure of the environment, 
+but the code the supervised learning algorithm to separate overlapping audio clips is:
+
+***
+[W,s,v] = svd((repmat(sum(x.*x,1),size(x,1),1).*x)*x`);
+***
+
+svd - stands for single value decomposition which is a linear algebra routine, 
+and is built into Octave.
+
+With Octave and MTATLAB many learning algorithms can become shortened lines of code 
+(most efficient) code for algorithms.
+
+Most Silicon Valley companies prototype code in Octave because of it's ability to 
+write efficient code, simplify complex algorithms, and making it 
+extremely quick to implement learning algorithms. 
+
+??? Second question:
+
+Of the following examples, which would you address using an unsupervised learning algorithm? 
+Check all that apply:
+
+A) Given email labeled spam/not spam, learn spam filter (my guess yes!)
+B) Given set of new web articles, group them into set of articles about the same story.
+C) Given a database of customer data, automatically discover market segments and group /
+customers into different market segments. 
+D) Given a dataset of patients diagnosed with having diabetes or not, /
+learn to classify new patients as having diabetes or not. 
+
+
+I was incorrect. A (because cluster emails together using a filter),  
+B (because clusters news articles into groups of same stories), 
+C (because no predefined market segments, need algorithm to determine market segments).
+
+Not D (because this is used to classify patients as either diabetic or not. 
+User would need to input this information prior, and thus would be a supervised learning algorithm. 
+
+Not A (because the emails are already pre-defined to be spam/not spam and all the 
+algorithm is doing is classifying emails as spam and not spam. 
+It is not ato creating and clustering these groups together. 
+
+***Quiz # 1***
+
+1) A computer program is said to learn from experience E with
+
+respect to some task T and some performance measure P if its
+
+performance on T, as measured by P, improves with experience E.
+
+Suppose we feed a learning algorithm a lot of historical weather
+
+data, and have it learn to predict weather. In this setting, what is T?
+
+-Ans: T is the weather prediction task.
+
+2) Suppose you are working on weather prediction, and your weather
+
+station makes one of three predictions for each day's weather:
+
+Sunny, Cloudy or Rainy. You'd like to use a learning algorithm
+
+to predict tomorrow's weather.
+
+Would you treat this as a classification or a regression problem?
+
+-Ans: Classification as it classifies a day as sunny, cloudy or rainy. 
+
+3) Suppose you are working on stock market prediction. 
+
+You would like to predict whether or not a certain company will win a patent infringement /
+
+lawsuit (by training on data of companies that had to defend against similar lawsuits). 
+
+Would you treat this as a classification or a regression problem?
+
+-Ans: Classification because the goal is to predict if the company will win or not. 
+Thus, the algorithm classifies the lawsuit to either win or not (0,1). 
+
+4) INCORRECT Need to study different examples of supervised and unsupervised learning algorithms. 
+
+Some of the problems below are best addressed using a supervised
+
+learning algorithm, and the others with an unsupervised
+
+learning algorithm. Which of the following would you apply
+
+supervised learning to? (Select all that apply.) In each case, assume some appropriate
+
+dataset is available for your algorithm to learn from.
+
+-Ans: unsure
+
+5) What is the definition of Machine Learning
+
+-Ans: Correct - the field of study that gives computers the ability to learn without /
+being explicitly programmed.
+
+NOTES FROM Week 1 WIKI:
+
+***
+Supervised learning problems are categorized into "regression" and "classification" problems. 
+In a regression problem, we are trying to predict results within a continuous output, 
+meaning that we are trying to map input variables to some continuous function. 
+In a classification problem, we are instead trying to predict results in a discrete output. 
+In other words, we are trying to map input variables into discrete categories.
+
+Tom Mitchell provides a more modern definition: "A computer program is said to learn from 
+experience E with respect to some class of tasks T and performance measure P, 
+if its performance at tasks in T, as measured by P, improves with experience E."
+
+Example: playing checkers.
+
+E = the experience of playing many games of checkers
+T = the task of playing checkers.
+P = the probability that the program will win the next game.
+
+***
+
+Examples:
+
+Given data about the size of houses on the real estate market, try to predict their price. 
+Price as a function of size is a continuous output, so this is a regression problem.
+
+We could turn this example into a classification problem by instead making our output /
+about whether the house "sells for more or less than the asking price." 
+Here we are classifying the houses based on price into two discrete categories.
+
+
+***Linear Regression (AKA Univariate Linear Regression) with One Variable*** Notes week 1
+
+ Recall that *regression problems*, we are taking input variables and trying to map the 
+ output onto a *continuous* expected result function.
+ 
+ Univariate linear regression is used when you want to predict a single output value 
+ from a single input value.
+ 
+ This is supervised learning, so we already know (have an idea of) the input/output cause and effect.
+ 
+ *The hypothesis Function*
+ 
+ Our hypothesis function has the general form:
+
+Be careful there are zeros (0) and thetas (θ) in the equation below it reads: 
+the hypothesis function, h sub theta, takes input x and is equal to theta knot (theta sub zero)
+plus the quantity of theta sub 1 multiplied by x)
+h_θ(x)=θ_0+θ_1x               hθ(x) could also be = to "y" (e.g. hθ(x)=y=θ0+θ1x)
+
+*Cost Function* (see screenshot for Cost Function Formula) - measure of the accuracy of the hypothesis function.
+
+Cose function - takes an average (actually a fancier version of an average) of all the 
+results of the hypothesis with inputs from x's compared to the actual output y's.
+
+It reads: the Cost Function J of theta knot, "theta one" (theta sub 1) equals 1 divided by 2m 
+times the sum from i equals 1 to m of the quantity of function h sub theta x raise to the index i, 
+minus y raise to the index i, squared. See Cost Function screenshot in MachineLearning folder. 
+
+J(θ0,θ1)=1/2m∑ i=1 to m (hθ(x^(i))−y^(i))^2
+
+To break it apart, it is (1/2)x¯ where x¯ is the mean of the squares of hθ(x(i))−y(i), 
+or the difference between the predicted value and the actual value.
+
+AKA Squared Error Function or Mean Squared Error
+
+*Gradient Descent* (See screenshot for Gradient Descent Formula) a way of automatically 
+improving ("Learning") the hypothesis function.
+
+We will know that we have succeeded when our cost function is at the very bottom of the 
+pits in our graph, i.e. when its value is the minimum.
+
+The way we do this is by taking the derivative (the line tangent to a function) of our 
+cost function. The slope of the tangent is the derivative at that point and it will give 
+us a direction to move towards. We make steps down that derivative by the parameter α, 
+called the learning rate.
+
+The gradient descent equation is:
+
+repeat until convergence:
+θj:=θj−α(∂/∂θj)J(θ0,θ1)
+for j=0 and j=1
+
+Intuitively, this could be thought of as:
+
+repeat until convergence:
+θj:=θj−α[Slope of tangent aka derivative]
+
+*Gradient Descent for Linear Regression* (see screenshot Gradient Descent for Linear Regression formula)
+
+repeat until convergence: {θ_0 := θ_1 := } θ_0 − α(1/m ∑i=1m (h_θ(x^(i))−y^(i))) θ_1 − α(1/m ∑i=1m((h_θ(x^(i))−y^(i))x^(i))
+where m is the size of the training set, θ_0 a constant that will be changing simultaneously with θ_1 and x^(i),y^(i) are values of the given training set (data).
+
+Note that we have separated out the two cases for θ_j and that for θ_1 we are multiplying x^(i) at the end due to the derivative.
+
+The point of all this is that if we start with a guess for our hypothesis and then repeatedly
+
+apply these gradient descent equations, our hypothesis will become more and more accurate.
+
+***Linear Regression with One Variable: Model Representation***
+
+This is our first algorithm! We will also see what the overall process for supervised learning is.
+
+*Here is how a supervised learning algorithm works:*
+
+Start with 1) Training set (e.g. housing prices)
+       					|
+2) Feed Training Set to our Learning Algorithm. 
+
+It is then Learning Algorithm's job to 3) output a function, 
+which by convention is normally denoted "h"
+
+So, if x is size of house and is put into the hypothesis or the learning algorithm, 
+it should be able to output an estimated price of the house (which is still a function of a single value)
+Just like how functions work. X input output is y, or x is associated with a y value. 
+
+Remember: hypothesis function, h sub theta, takes input x and is equal to theta knot (theta sub zero)
+plus the quantity of theta sub 1 multiplied by x)
+
+h_θ(x)=θ_0+θ_1x
+
+***Model and Cost Function***
+
+Now we are going to learn how to fit a line to our data using the Cost Function.
+
+In the hypothesis equation, h_θ(x)=θ_0+θ_1x, the θ_0 (theta knot) and θ_1 (theta one) are
+parameters. 
+We are going to find these parameters to put into our equation. How do we determine what
+the best choices for theta know and one are?
+
+Idea: Choose θ_0 (theta knot) and θ_1 (theta one) so that h_θ(x) is close to 
+y for our training examples (x, y).
+
+The training set (or training examples) is the actual collected real data set that we are 
+trying to use as a base of comparison to build our model cost function. 
+So, we want to choose thetas that are as close to real collected values as possible (limits error).
+
+In order to do this setup and accurately choose the theta parameters for the cost function, 
+we must solve a minimization problem of the thetas.
+
+***Cost Function - Intuition I*** (see screenshot Simplified Cost Function Minimization_w1)
+
+*We have the full cost function:*
+
+hypothesis function h_θ(x)=θ_0+θ_1x
+
+Parameters (θ_0,θ_1)
+
+Cost function 
+
+J(θ_0,θ_1)=1/2m∑ i=1 to m (h_θ(x^(i))−y^(i))^2
+
+Goal: Minimize over the parameters (θ_0,θ_1) or minimize Cost Function J.
+
+*The simplified cost function* is when θ_0 = 0 which makes the cost function's 
+minimization problem change in the following ways:
+
+hypothesis function h_θ(x)=θ_1x
+
+Parameter (θ_1)
+
+Cost function 
+
+J(θ_1)=1/2m∑ i=1 to m (θ_1x^(i)−y^(i))^2
+
+Goal: Minimize over the parameters (θ_1) or minimize Cost Function J.
+
+This will cause the Cost Function when minimized to fit a line to the set of data that will 
+always passes through the origin. This is because θ_0 = 0.
+
+Now we are going to understand the cost function in more depth by using the simplified function. 
+
+see screenshot Simplified Cost Function Minimization_w1.jpg
+
+***Cost Function Intuition II*** (see screenshot Predicting Parameters Cost Function)
+
+Contour plots - cross-section slices of a 3D object displayed on a 2D coordinate plane (Surface) 
+
+When the simplified version of the Cost Function is graphed we get a 2D function. 
+When we don't use the simplified version of the cost function we still include θ_0, and we get:
+
+J(θ_0,θ_1)=1/2m∑ i=1 to m (h_θ(x^(i))−y^(i))^2
+
+Since we are now trying to discover the best (lowest error) parameters it means 
+that we will be graphing a function in 3D of J(θ_0,θ_1). 
+However, there still should be a minimum value or set. 
+
+Dr. Ng uses contour plots to draw graph the 2D representation (plotted cross-sections) of 3D graphs. 
+
+(In the related screenshot, Dr. Ng applies different values to (θ_0,θ_1) 
+to determine a more accurate parameters that fit an accurate linear regression to the model. 
+He also uses Counter Plots to show 2D representation of 3D graph of J(θ_0,θ_1).
+
+What we really want is an efficient algorithm that automatically finds the 
+best (most accurate) parameters for our cost function and improving hypothesis. 
+Once again, whole idea is to minimize the cost function, J(θ_0,θ_1),
+so that the chosen parameters have the least error. 
+
+***Algorithm Called Gradient Descent***
+
+This algorithm minimizes the cost function J(θ_0,θ_1)
+
+Problems Setup:
+
+We have some function J(θ_0,θ_1), 
+and we want the min over θ_0 and θ_1 of J(θ_0,θ_1)
+
+*Outline for writing this algorithm:*
+
+Start with some values (θ_0,θ_1)
+Keep changing θ_0 and θ_1 to reduce J(θ_0,θ_1) until we hopefully end up at a minimum. 
+
+To state this generally for the cost function:
+
+J(θ_0,θ_1,θ_2,...,θ_n)
+
+min over θ_0,θ_1,θ_2,...,θ_n of the function J(θ_0,θ_1,θ_2,...,θ_n).
+
+OK HERE WE GO
+
+repeat until convergent {
+		θ_j := θ_j - a(d/dθ_j)J(θ_0,θ_1)   (for j=0 and j=1)
+}
+
+where 
+
+the sign ":=" means set a equal to and then overwrite original. Look at the example below.
+
+Assignment example:
+
+a := b       means take the value in "b" and use it to overwrite the value of "a"... 
+Set a to be equal to the value of B.
+
+We can also do this with equations and variables:
+
+a := a+1     rather a takes a + 1 continuously; 1, 2, 3, etc.
+
+
+a = b truth assertion (setting a variable). 
+
+Let's take a look at the formula:
+θ_j - a(d/dθ_j)J(θ_0,θ_1)
+
+the "a" is an alpha and is a number referred to as the learning rate. 
+Controls how big a step we take downhill with gradient descent. 
+Big alpha = big steps, small alpha = small steps
+
+
+(d/dθ_j)J(θ_0,θ_1) take the derivative of J(θ_0,θ_1)
+
+The last part of the equation (for j=0 and j=1) is about updating θ_0 and θ_1 of the gradient descent:
+
+Remember the equation:
+
+θ_j := θ_j - a(d/dθ_j)J(θ_0,θ_1)   (for j=0 and j=1) 
+
+(for j=0 and j=1) is so you update θ_j = θ_0 and θ_j = θ_1
+
+You want to simultaneously update (θ_0,θ_1) with better (more accurate estimations) 
+once again ultimately looking for the parameters which map the best graph/function to the set of data. 
+So see below for the way to code this for a computer remember the definition of ":=" 
+and why you can't add (θ_0,θ_1) directly back into themselves when coding. 
+
+*How to code*
+
+Correct: Simultaneous update - NOTE - it must be in this format to be an efficient algorithm. 
+1) Variable temp0 and temp1 defined and then in respective descending order θ_0 and θ_1.
+
+temp0 := θ_0 - a(d/dθ_0)J(θ_0,θ_1)
+temp1 := θ_1 - a(d/dθ_1)J(θ_0,θ_1)
+θ_0 := temp0
+θ_1 := temp1
+
+What I think happens is that we create variables for (θ_0,θ_1) that use ":=" to add the 
+value back into the original variable. 
+We can't directly use θ_0 and θ_1 when coding in a computer because then we would be 
+defining the variable within itself. Thus, we use an intermediary variable to connect 
+adding estimated parameters from the equation back into the original (θ_0,θ_1). 
+Let's see if that is correct.
+
+Ultimately you have to be careful because if alpha is too small then, gradient descent can be too slow, 
+and will process (think) for too long;
+
+and if alpha is too big then you can "overshoot" the minimum value when you 
+repeatedly estimate your parameters. 
+
+
+***Putting Together Gradient Descent algorithm and linear regression model***
+
+Gradient Descent Algorithm:
+θ_j := θ_j - a(d/dθ_j)J(θ_0,θ_1)   (for j=0 and j=1)
+
+Linear Regression Model:
+-where hypothesis is h_θ(x)=θ_0+θ_1x, and 
+-cost function is J(θ_0,θ_1)=1/2m∑ i=1 to m (h_θ(x^(i))−y^(i))^2
+finding the min over θ_0,θ_1 of J(θ_0,θ_1)
+
+(Please see screenshot Gradient Descent Algorithm_Complete 2015-11-05 at 3.22.11 PM)
+
+where the code to update θ_0 and θ_1 simultaneously looks like:
+
+repeat until convergent {
+
+θ_0 := θ_0 - a(1/m)∑ i=1 to m (h_θ(x^(i))−y^(i))
+θ_1 := θ_1 - a(1/m)∑ i=1 to m (h_θ(x^(i))−y^(i))x^(i)
+
+} 
+
+This code will find the local minimum, which in 3D is a tangent plane of two variables. 
+My guess is that to get the full derivative of J(θ_0,θ_1) with respect to θ_0 and θ_1 will
+be the sum of the two derivatives (e.g. (dj /dθ_0 dθ_1) = (d/dθ_0) + (d/dθ_1). 
+Or this may be what's happening when we are doing this simultaneously. 
+
+For linear regression, the cost function will always produce convex functions/graphs. 
+What we must note about linear regression is that the local min of the cost function 
+is also the global minimum since we are working within single or duble "linear" regressions not 
+multivariate regressions. My guess is that with multivariate regressions, we will 
+compare all local minimum within a accurate range to see which is the global out of 
+that set of local minimums. 
+
+This gradient descent algorithm is also called:
+
+"Batch" Gradient Descent
+
+"Batch": each step of the gradient descent uses all of the training examples. 
+
+Remember: the we use all of the training examples. 
+This means that we sum (∑ i=1 to m (h_θ(x^(i))−y^(i))^2) over all of our training examples. 
+
+There are some examples of training sets that don't use "Batch" because they focus on a 
+subset of all of the training examples. 
+
+Now we know how to calculate gradient descent for linear regression. 
+
+
+***Linear Algebra Review***
+
+when looking at housing prices based on square feet, we can use the hypothesis 
+
+h_θ(x)=θ_0+θ_1x to find what the housing price should be based off of square feet. 
+
+if we have found out that θ_0 = -40 and θ_1 =.25, then the equation looks like:
+
+h_θ(x)=-40+.25x
+
+The reason we knew that we could fit the hypothesis to housing prices is because 
+we know that the size has a linear correlation with price. 
+
+So if our housing sizes are:
+
+2104
+1416
+1534
+852
+
+we can take our house sizes and the hypothesis function as multiplied matrices 
+to determine (estimate) the housing price of the x sized house. 
+
+So we build the matrix
+
+--      --
+|1   2104|        --  --
+|1   1416|	  X   |	-40|
+|1   1534|		  |	.25|
+|1    852|	      --  --
+--      --	
+
+This will equal a 4 X 1 vector of housing prices. 
+
+So we used our hypothesis to predict the values of prices of the different size houses. 
+
+*We code this like the following*
+
+prediction = DataMatrix*parameters   
+
+; where the DataMatrix is the given set of 
+original data turned into a matrix (e.g. house sizes matrix) ; and 
+parameters (like our thetas) that when multiplied by the house size matrix,
+produces estimates of our house prices. 
+
+
+***Linear Algebra Review*** Last section of week 1
+
+Everything is review, but need to focus on how to compute INVERSE and TRANSPOSE of a matrix. 
+
+*Dr. Ng uses Octave to compute the INVERSE of a function. 
+
+1) Run Octave
+2) To input matrix, simply clarify a variable which lists the matrix as an array of entries
+ that can be listed on a single row lines. 
+For instance, to input matrix a with 3 rows and 2 columns (3x2) looks like this on the command line:
+
+> A = [2 3;4 5;6 7]
+
+I defined A as a matrix by using hard brackets [], specifying individual row entries 
+by a space in between each, and by using semicolons to distinguish between each matrix column.
+
+To calculate the inverse of a matrix, use the following Octave command line:
+
+> pinv(A)
+
+
+Now let's take a look at the TRANSPOSE of a matrix. The Transpose rotates a matrix 90 degrees, 
+and basically switches the row and column entries. 
+
+For example 
+
+A = [1 2 0;3 5 9]    A^T = [1 3;2 5;3 9]
+
+First row of A becomes the first column of A^T, second row become second column, etc.  
+
+*To run the TRANSPOSE in Octave:
+
+> transpose(A)    ; where "transpose" is the command and "A" is our matrix.
+
+Example of Rotation Matrix in 2D
+
+Rotation Matrix   A = [cosθ -sinθ;sinθ cosθ]
+
+Example of Rotation Matrix about the x-axis in 3D
+
+Rotation Matrix about x-axis  A = [1 0 0;0 cosθ -sinθ;0 sinθ cosθ]
+
+Example of Rotation Matrix about the y-axis in 3D
+
+Rotation Matrix about y-axis   A = [cosθ 0 sinθ;0 1 0;-sinθ 0 cosθ]
+
+Example of Rotation Matrix about the z-axis in 3D
+
+Rotation Matrix about z-axis   A = [cosθ -sinθ 0;sinθ cosθ 0;0 0 1]
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
